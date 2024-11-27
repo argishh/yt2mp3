@@ -4,7 +4,9 @@ from utils import FOOTER
 from pytubefix import YouTube
 from pytubefix.cli import on_progress
 from url_validator import is_valid_youtube_url
+from pytubefix.helpers import reset_cache
 
+reset_cache()
 
 st.markdown('## **YouTube to MP3 Converter**')
 st.markdown(FOOTER,unsafe_allow_html=True)
@@ -20,7 +22,7 @@ try:
                 raise Exception('Error: Invalid URL!')
 
             # audio = YouTube(URL, on_progress_callback=on_progress)    # displays progerss during download
-            audio = YouTube(URL)
+            audio = YouTube(URL, use_po_token=True)
             title = audio.title
             audio_stream = audio.streams.filter(only_audio=True).first()
             
