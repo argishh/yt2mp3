@@ -1,1 +1,2 @@
 pytubefix==8.6.0
+streamlit==1.40.2
