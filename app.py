@@ -17,16 +17,22 @@ try:
     left, _, _ = st.columns(3)
     
     if left.button("Download Audio", icon="⬇️", type='primary', use_container_width=True):
-        with st.spinner():
+        with st.status('downloading audio..'):
+            st.write('1. validating URL..')
             if not is_valid_youtube_url(URL):
                 raise Exception('Error: Invalid URL!')
-
+            
+            st.write('2. looking for audio..')
+            st.write('> Warning: If search takes too long, clone the repository and run the app locally')
             # audio = YouTube(URL, on_progress_callback=on_progress)    # displays progerss during download
-            audio = YouTube(URL, use_po_token=True)
+            audio = YouTube(URL)
             title = audio.title
             audio_stream = audio.streams.filter(only_audio=True).first()
+            st.write('audio found!')
             
+            st.write('3. downloading audio..')
             audio_stream.download(filename=f'{title}.mp3')
+            st.write('audio downloaded!')
             
         st.markdown('## ') # seperator
         # st.success('Audio downloaded succesfully!', icon="✅")
