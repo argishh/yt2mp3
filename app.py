@@ -43,3 +43,5 @@ try:
             
 except Exception as e:
     st.text(f'Ran into an unexpected error!\nError: {e}')
+    st.write('> Try cloning the repository and run the app locally')
+    st.write("(Click the github logo at the top right corner)")
